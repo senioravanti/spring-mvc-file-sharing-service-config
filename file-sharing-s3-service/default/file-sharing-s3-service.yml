@@ -1,0 +1,46 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      # по умолчанию 10 мб
+      max-file-size: ${MAX_FILE_SIZE:10MB}
+      max-request-size: ${MAX_REQUEST_SIZE:10MB}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: ${SWAGGER_UI_PATH}
+
+server:
+#  port: 8001
+  port: ${S3_SERVICE_PORT}
+  servlet:
+    context-path: ${SERVER_PATH}
+
+minio:
+#  access-key: CLOOXK6dI6hmSYZ3VL8f
+  access-key: ${MINIO_ACCESS_KEY}
+#  secret-key: sOaJV7iqiTaeA0QPNYY9ykN5tgUZknIr543lheZZ
+  secret-key: ${MINIO_SECRET_KEY}
+#  url: http://localhost:9000
+  url: http://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT}
+
+  region: ${MINIO_REGION}
+  bucket: ${MINIO_BUCKET:uploaded-files}
+
+logging:
+  level:
+    ru:
+      manannikov:
+        filesharingservice:
+          s3: DEBUG
+
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+    health:
+      show-details: always

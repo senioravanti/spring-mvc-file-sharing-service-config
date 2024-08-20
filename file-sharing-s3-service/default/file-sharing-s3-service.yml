@@ -6,16 +6,32 @@ spring:
       max-file-size: ${MAX_FILE_SIZE:10MB}
       max-request-size: ${MAX_REQUEST_SIZE:10MB}
 
-springdoc:
-  swagger-ui:
-    enabled: true
-    path: ${SWAGGER_UI_PATH}
-
 server:
 #  port: 8001
   port: ${S3_SERVICE_PORT}
   servlet:
     context-path: ${SERVER_PATH}
+
+eureka:
+  instance:
+    # Регистрировать ip-адрес службы вместо имени хоста
+    preferIpAdress: true
+
+  client:
+    # по умолчанию: true
+    registerWithEureka: true
+    # Клиент будет хешировать реестр локально и использовать его для вызова других служб, вместо обращения к Eureka
+    # Каждые 30 с. клиент будет повторно связываться с Eureka и обновлять свою копию реестра
+    # по умолчанию: true
+    fetchRegistry: true
+    serviceUrl:
+      # список экземляров сервисов Eureka, которые клиент может использовать для обнаружения служб  
+      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka/ 
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: ${SWAGGER_UI_PATH}
 
 minio:
 #  access-key: CLOOXK6dI6hmSYZ3VL8f

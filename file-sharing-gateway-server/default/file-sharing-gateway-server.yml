@@ -31,5 +31,8 @@ management:
       exposure:
         include: "*"
 
+    gateway:
+      enabled: true
+
     health:
       show-details: always

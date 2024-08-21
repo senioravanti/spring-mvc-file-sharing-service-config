@@ -5,12 +5,15 @@ server:
 
 spring:
   cloud:
-    loadbalancer.ribbon.enabled: false
-
     gateway:
-      discovery.locator:
-        enabled: true
-        lowerCaseServiceId: true
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+      # routes:
+      # - id: s3
+      #   uri: 
 
 
 eureka:

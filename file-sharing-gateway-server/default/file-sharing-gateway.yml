@@ -1,0 +1,35 @@
+server:
+#  port: 8071
+  port: ${GATEWAY_SERVER_PORT}
+
+
+spring:
+  cloud:
+    loadbalancer.ribbon.enabled: false
+
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URI} 
+
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+    health:
+      show-details: always

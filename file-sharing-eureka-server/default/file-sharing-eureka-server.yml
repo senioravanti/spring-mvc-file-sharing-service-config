@@ -3,6 +3,8 @@ server:
   port: ${EUREKA_SERVER_PORT}
 
 eureka:
+  renewalPercentThreshold: 0.49
+
   instance:
     hostname: localhost
 
@@ -11,7 +13,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka/
+      defaultZone: ${EUREKA_SERVER_URI}
 
   server:
     waitTimeInMsWhenSyncEmpty: 5

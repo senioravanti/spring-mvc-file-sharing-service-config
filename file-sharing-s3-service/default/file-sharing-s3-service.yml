@@ -1,3 +1,9 @@
+server:
+#  port: 8001
+  port: ${S3_SERVICE_PORT}
+  servlet:
+    context-path: ${SERVER_PATH}
+
 spring:
   servlet:
     multipart:
@@ -6,16 +12,14 @@ spring:
       max-file-size: ${MAX_FILE_SIZE:10MB}
       max-request-size: ${MAX_REQUEST_SIZE:10MB}
 
-server:
-#  port: 8001
-  port: ${S3_SERVICE_PORT}
-  servlet:
-    context-path: ${SERVER_PATH}
+  cloud:
+    loadbalancer.ribbon.enabled: false
+
 
 eureka:
   instance:
     # Регистрировать ip-адрес службы вместо имени хоста
-    preferIpAdress: true
+    preferIpAddress: true
 
   client:
     # по умолчанию: true
@@ -26,12 +30,14 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       # список экземляров сервисов Eureka, которые клиент может использовать для обнаружения служб  
-      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka/ 
+      defaultZone: ${EUREKA_SERVER_URI} 
+
 
 springdoc:
   swagger-ui:
     enabled: true
     path: ${SWAGGER_UI_PATH}
+
 
 minio:
 #  access-key: CLOOXK6dI6hmSYZ3VL8f
@@ -39,7 +45,7 @@ minio:
 #  secret-key: sOaJV7iqiTaeA0QPNYY9ykN5tgUZknIr543lheZZ
   secret-key: ${MINIO_SECRET_KEY}
 #  url: http://localhost:9000
-  url: http://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT}
+  url: ${MINIO_URI}
 
   region: ${MINIO_REGION}
   bucket: ${MINIO_BUCKET:uploaded-files}

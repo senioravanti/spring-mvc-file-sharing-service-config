@@ -28,6 +28,7 @@ spring:
 
         filters:
         - RewritePath=/s3/(?<path>.*), /$\{path}
+        - PrefixPath=/api
 
 # actuator
 management:

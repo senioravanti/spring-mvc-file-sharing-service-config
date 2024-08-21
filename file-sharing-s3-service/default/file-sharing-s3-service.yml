@@ -4,17 +4,6 @@ server:
   servlet:
     context-path: ${SERVER_PATH}
 
-spring:
-  servlet:
-    multipart:
-      enabled: true
-      # по умолчанию 10 мб
-      max-file-size: ${MAX_FILE_SIZE:10MB}
-      max-request-size: ${MAX_REQUEST_SIZE:10MB}
-
-  cloud:
-    loadbalancer.ribbon.enabled: false
-
 
 eureka:
   instance:
@@ -31,6 +20,20 @@ eureka:
     serviceUrl:
       # список экземляров сервисов Eureka, которые клиент может использовать для обнаружения служб  
       defaultZone: ${EUREKA_SERVER_URI} 
+
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      # по умолчанию 10 мб
+      max-file-size: ${MAX_FILE_SIZE:10MB}
+      max-request-size: ${MAX_REQUEST_SIZE:10MB}
+
+  cloud:
+    loadbalancer.ribbon.enabled: false
+
+
 
 
 springdoc:

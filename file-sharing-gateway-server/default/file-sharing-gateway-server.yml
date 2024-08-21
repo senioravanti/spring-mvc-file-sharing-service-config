@@ -3,19 +3,6 @@ server:
   port: ${GATEWAY_SERVER_PORT}
 
 
-spring:
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lowerCaseServiceId: true
-
-      # routes:
-      # - id: s3
-      #   uri: 
-
-
 eureka:
   instance:
     preferIpAddress: true
@@ -26,6 +13,21 @@ eureka:
 
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_URI} 
+
+
+spring:
+  cloud:
+    gateway:
+      loadbalancer.ribbon.enabled: false
+      routes:
+      # lb -> load balancer
+      - id: file-sharing-s3-service
+        uri: lb://file-sharing-s3-service
+        predicates:
+        - Path=/s3/**
+
+        filters:
+        - RewritePath=/s3/(?<path>.*), /$\{path}
 
 # actuator
 management:

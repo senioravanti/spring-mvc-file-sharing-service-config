@@ -23,17 +23,15 @@ eureka:
 
 
 spring:
+  cloud:
+    loadbalancer.ribbon.enabled: false
+
   servlet:
     multipart:
       enabled: true
       # по умолчанию 10 мб
       max-file-size: ${MAX_FILE_SIZE:10MB}
       max-request-size: ${MAX_REQUEST_SIZE:10MB}
-
-  cloud:
-    loadbalancer.ribbon.enabled: false
-
-
 
 
 springdoc:
@@ -55,10 +53,7 @@ minio:
 
 logging:
   level:
-    ru:
-      manannikov:
-        filesharingservice:
-          s3: DEBUG
+    ru.manannikov.filesharingservice.s3: DEBUG
 
 # actuator
 management:

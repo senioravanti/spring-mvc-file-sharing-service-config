@@ -17,11 +17,13 @@ eureka:
 
 spring:
   cloud:
+    loadbalancer.ribbon.enabled: false
     gateway:
-      loadbalancer.ribbon.enabled: false
       routes:
       # lb -> load balancer
+      # Просто идентификатор роута
       - id: file-sharing-s3-service
+        # Идентификатор сервиса, зарегистрированного в eureka
         uri: lb://file-sharing-s3-service
         predicates:
         - Path=/s3/**

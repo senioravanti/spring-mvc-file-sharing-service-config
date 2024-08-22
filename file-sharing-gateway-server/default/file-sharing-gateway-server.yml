@@ -31,6 +31,32 @@ spring:
         filters:
         - RewritePath=/s3/(?<path>.*), /$\{path}
         - PrefixPath=/api/v1
+        - AuthenticationFilter
+
+
+      - id: file-sharing-authentication-service
+        uri: lb://file-sharing-security-service
+        predicates:
+        - Path=/auth/**
+
+        filters:
+        - PrefixPath=/api/v1
+
+
+      - id: file-sharing-users-service
+        uri: lb://file-sharing-security-service
+        predicates:
+        - Path=/users/**
+
+        filters:
+        - PrefixPath=/api/v1
+        - AuthenticationFilter
+
+
+app:
+  security:
+    jwt:
+      key: ${JWT_SECRET_KEY}
 
 # actuator
 management:

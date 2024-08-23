@@ -43,9 +43,9 @@ spring:
         - Path=/s3/object/**
 
         filters:
-        - RewritePath=/s3/object/(?<path>.*), /object/$\{path}
+        - RewritePath=/s3/object/(?<path>.*), /$\{path}
         - AuthorizationFilter=MANAGE_OBJECTS
-        - PrefixPath=/api/v1
+        - PrefixPath=/api/v1/object
 
 
       - id: file-sharing-authentication-service

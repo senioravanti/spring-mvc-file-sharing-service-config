@@ -40,12 +40,12 @@ spring:
         # Идентификатор сервиса, зарегистрированного в eureka
         uri: lb://file-sharing-s3-service
         predicates:
-        - Path=/s3/objects/**,/object/**
+        - Path=/s3/object/**
 
         filters:
-        - RewritePath=(/s3)?/object/(?<path>.*), /$\{path}
+        - RewritePath=/s3/object/(?<path>.*), /object/$\{path}
         - AuthorizationFilter=MANAGE_OBJECTS
-        - PrefixPath=/api/v1/object
+        - PrefixPath=/api/v1
 
 
       - id: file-sharing-authentication-service

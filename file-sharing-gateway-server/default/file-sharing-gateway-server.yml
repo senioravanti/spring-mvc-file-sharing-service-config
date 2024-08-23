@@ -24,16 +24,28 @@ spring:
       routes:
       # lb -> load balancer
       # Просто идентификатор роута
-      - id: file-sharing-s3-service
+      - id: file-sharing-s3-buckets
         # Идентификатор сервиса, зарегистрированного в eureka
         uri: lb://file-sharing-s3-service
         predicates:
-        - Path=/s3/**
+        - Path=/s3/bucket/**,/bucket/**
 
         filters:
-        - RewritePath=/s3/(?<path>.*), /$\{path}
-        - PrefixPath=/api/v1
-        - AuthorizationFilter=ROLE_ADMIN
+        - RewritePath=(/s3)?/bucket/(?<path>.*), /$\{path}
+        - AuthorizationFilter=MANAGE_BUCKETS
+        - PrefixPath=/api/v1/bucket
+
+
+      - id: file-sharing-s3-objects
+        # Идентификатор сервиса, зарегистрированного в eureka
+        uri: lb://file-sharing-s3-service
+        predicates:
+        - Path=/s3/objects/**,/object/**
+
+        filters:
+        - RewritePath=(/s3)?/object/(?<path>.*), /$\{path}
+        - AuthorizationFilter=MANAGE_OBJECTS
+        - PrefixPath=/api/v1/object
 
 
       - id: file-sharing-authentication-service
@@ -43,16 +55,6 @@ spring:
 
         filters:
         - PrefixPath=/api/v1
-
-
-      - id: file-sharing-users-service
-        uri: lb://file-sharing-security-service
-        predicates:
-        - Path=/users/**
-
-        filters:
-        - PrefixPath=/api/v1
-        - AuthorizationFilter=ROLE_ADMIN
 
 
 app:
@@ -73,3 +75,8 @@ management:
 
     health:
       show-details: always
+
+
+logging:
+  level:
+    ru.manannikov.filesharingservice.gatewayserver: DEBUG

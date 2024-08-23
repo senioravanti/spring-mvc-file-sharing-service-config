@@ -28,10 +28,10 @@ spring:
         # Идентификатор сервиса, зарегистрированного в eureka
         uri: lb://file-sharing-s3-service
         predicates:
-        - Path=/s3/bucket/**
+        - Path=/s3/bucket/**,/bucket/**
 
         filters:
-        - RewritePath=/s3/bucket/(?<path>.*), /$\{path}
+        - RewritePath=/(?:s3/)?bucket/(?<path>.*), /$\{path}
         - AuthorizationFilter=MANAGE_BUCKETS
         - PrefixPath=/api/v1/bucket
 

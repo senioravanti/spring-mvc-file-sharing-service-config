@@ -33,7 +33,7 @@ spring:
         filters:
         - RewritePath=/s3/(?<path>.*), /$\{path}
         - PrefixPath=/api/v1
-        - AuthorizationFilter=ADMIN
+        - AuthorizationFilter=ROLE_ADMIN
 
 
       - id: file-sharing-authentication-service
@@ -52,7 +52,7 @@ spring:
 
         filters:
         - PrefixPath=/api/v1
-        - AuthorizationFilter=ADMIN
+        - AuthorizationFilter=ROLE_ADMIN
 
 
 app:

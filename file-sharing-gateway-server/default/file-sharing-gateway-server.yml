@@ -16,6 +16,8 @@ eureka:
 
 
 spring:
+  main: 
+    web-application-type: reactive
   cloud:
     loadbalancer.ribbon.enabled: false
     gateway:

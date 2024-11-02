@@ -19,7 +19,7 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       # список экземляров сервисов Eureka, которые клиент может использовать для обнаружения служб  
-      defaultZone: ${EUREKA_SERVER_URI} 
+      defaultZone: '${EUREKA_SERVER_URI}' 
 
 
 spring:
@@ -30,8 +30,12 @@ spring:
     multipart:
       enabled: true
       # по умолчанию 10 мб
-      max-file-size: ${MAX_FILE_SIZE:10MB}
-      max-request-size: ${MAX_REQUEST_SIZE:10MB}
+      max-file-size: '${MAX_FILE_SIZE:10MB}'
+      max-request-size: '${MAX_REQUEST_SIZE:10MB}'
+
+  security.oauth2.resourceserver:
+    jwt:
+      issuer-uri: 'http://localhost:8180/realms/filesharingservice-realm'
 
 
 springdoc:

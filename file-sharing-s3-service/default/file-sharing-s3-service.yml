@@ -35,7 +35,7 @@ spring:
 
   security.oauth2.resourceserver:
     jwt:
-      issuer-uri: 'http://localhost:8180/realms/filesharingservice-realm'
+      issuer-uri: 'http://localhost:${KEYCLOAK_PORT}/realms/filesharingservice-realm'
 
 
 springdoc:

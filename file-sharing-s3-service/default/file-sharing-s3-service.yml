@@ -36,6 +36,7 @@ spring:
   security.oauth2.resourceserver:
     jwt:
       issuer-uri: '${KEYCLOAK_URI}'
+      jwk-set-uri: '${KEYCLOAK_URI}/.well-known/openid-configuration'
 
 
 springdoc:
